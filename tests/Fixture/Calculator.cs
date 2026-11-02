@@ -8,4 +8,6 @@ public class Calculator
     }
 
     public string Greet(string name) => "hi " + name;
+
+    public class Memory { }
 }

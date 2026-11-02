@@ -57,7 +57,9 @@ def main():
     assert r[0]["serverInfo"]["name"] == "dotpeek-mcp"
     assert len(r[1]["tools"]) == 7
     assert ".NETCoreApp,Version=v8.0" in text(r[2])
-    assert "class public Fixture.Calculator" in text(r[3])
+    types = text(r[3]).splitlines()
+    assert "class public Fixture.Calculator" in types
+    assert types.count("class public Fixture.Calculator+Memory") == 1, types
     assert "Add(" in text(r[4]) and "Greet(" in text(r[4])
     calc = text(r[5])
     assert "public class Calculator" in calc and "a + b" in calc, calc
