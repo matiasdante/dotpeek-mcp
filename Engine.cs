@@ -150,16 +150,8 @@ namespace DotPeekMcp
 
         static VirtualFileSystemPath Vfs(string path) => VirtualFileSystemPath.Parse(path, InteractionContext.Local);
 
-        static IEnumerable<IMetadataTypeInfo> AllTypes(IMetadataAssembly asm)
-        {
-            var stack = new Stack<IMetadataTypeInfo>(asm.GetTypes());
-            while (stack.Count > 0)
-            {
-                var t = stack.Pop();
-                yield return t;
-                foreach (var nested in t.GetNestedTypes()) stack.Push(nested);
-            }
-        }
+        // GetTypes() is the flat TypeDef table: nested types are already included.
+        static IEnumerable<IMetadataTypeInfo> AllTypes(IMetadataAssembly asm) => asm.GetTypes();
 
         static IMetadataTypeInfo FindType(IMetadataAssembly asm, string name) =>
             AllTypes(asm).FirstOrDefault(t => t.FullyQualifiedName == name)
