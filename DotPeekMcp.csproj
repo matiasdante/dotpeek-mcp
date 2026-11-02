@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net472</TargetFramework>
+    <PlatformTarget>x64</PlatformTarget>
+    <LangVersion>latest</LangVersion>
+    <DotPeekHome Condition="'$(DotPeekHome)' == ''">$(LOCALAPPDATA)\JetBrains\Installations\dotPeek262</DotPeekHome>
+    <DefaultItemExcludes>$(DefaultItemExcludes);tests\**</DefaultItemExcludes>
+  </PropertyGroup>
+
+  <!-- Compiled against the local dotPeek install and resolved from it at runtime (Program.cs); JetBrains binaries are never copied. -->
+  <ItemGroup>
+    <Reference Include="JetBrains.Decompiler.Core" HintPath="$(DotPeekHome)\JetBrains.Decompiler.Core.dll" Private="false" />
+    <Reference Include="JetBrains.Platform.Metadata" HintPath="$(DotPeekHome)\JetBrains.Platform.Metadata.dll" Private="false" />
+    <Reference Include="JetBrains.Platform.Core" HintPath="$(DotPeekHome)\JetBrains.Platform.Core.dll" Private="false" />
+    <Reference Include="JetBrains.Platform.Util" HintPath="$(DotPeekHome)\JetBrains.Platform.Util.dll" Private="false" />
+    <Reference Include="JetBrains.Lifetimes" HintPath="$(DotPeekHome)\JetBrains.Lifetimes.dll" Private="false" />
+    <Reference Include="JetBrains.Annotations" HintPath="$(DotPeekHome)\JetBrains.Annotations.dll" Private="false" />
+    <Reference Include="Newtonsoft.Json" HintPath="$(DotPeekHome)\Newtonsoft.Json.dll" Private="false" />
+  </ItemGroup>
+
+</Project>
