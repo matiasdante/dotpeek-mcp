@@ -1,0 +1,47 @@
+name: Bug report
+description: Something does not work as documented.
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for reporting. Please do not attach proprietary assemblies or decompiled code you are not allowed to share.
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened
+      description: The tool you called, its arguments, and what you got back.
+      placeholder: "decompile_type on MyLib.dll, type MyLib.Foo, returned: ..."
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: What you expected
+    validations:
+      required: true
+  - type: input
+    id: dotpeek-version
+    attributes:
+      label: dotPeek version
+      description: Help > About in dotPeek, or the name of the install folder.
+      placeholder: "2026.2.4"
+    validations:
+      required: true
+  - type: input
+    id: target-framework
+    attributes:
+      label: Target framework of the assembly
+      description: Shown by load_assembly.
+      placeholder: ".NETFramework,Version=v4.8 or .NETCoreApp,Version=v8.0"
+  - type: input
+    id: client
+    attributes:
+      label: MCP client
+      placeholder: "Claude Code 2.x, Cursor, ..."
+  - type: textarea
+    id: logs
+    attributes:
+      label: Error output
+      description: Anything the server wrote to stderr, or the tool error text.
+      render: text
