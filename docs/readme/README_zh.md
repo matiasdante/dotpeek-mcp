@@ -12,6 +12,8 @@
 [![.NET Framework](https://img.shields.io/badge/.NET%20Framework-4.7.2-512bd4?style=flat-square&logo=dotnet&logoColor=white)](#环境要求)
 [![dotPeek](https://img.shields.io/badge/dotPeek-2026.2-000000?style=flat-square&logo=jetbrains&logoColor=white)](#环境要求)
 [![MCP](https://img.shields.io/badge/MCP-stdio-5c4ee5?style=flat-square)](#配置智能体)
+[![CI](https://img.shields.io/github/actions/workflow/status/matiasdante/dotpeek-mcp/ci.yml?branch=main&style=flat-square&label=CI)](https://github.com/matiasdante/dotpeek-mcp/actions/workflows/ci.yml)
+[![许可证: MIT](https://img.shields.io/badge/license-MIT-green?style=flat-square)](../../LICENSE)
 
 [快速开始](#快速开始) · [工作原理](#工作原理) · [工具](#工具) · [示例](#示例) · [常见问题](#常见问题) · [配置](#配置)
 
@@ -35,7 +37,15 @@
 - 编译需要 .NET SDK。二进制文件面向 .NET Framework 4.7.2，Windows 已自带。
 - Python 3，仅用于冒烟测试。
 
-### 编译
+### 安装
+
+```powershell
+irm https://raw.githubusercontent.com/matiasdante/dotpeek-mcp/v0.1.0/install.ps1 | iex
+```
+
+将该标签的源码下载到 `%LOCALAPPDATA%\dotpeek-mcp`，基于本机 dotPeek 编译，并在 Claude Code 中注册 `dotpeek`。如果没有 Claude Code，会输出适用于其他 MCP 客户端的配置。如果 dotPeek 安装在其他位置，请先设置 `DOTPEEK_HOME`。运行前可以先阅读 [`install.ps1`](../../install.ps1)。
+
+### 从源码编译
 
 ```powershell
 git clone https://github.com/matiasdante/dotpeek-mcp
@@ -47,7 +57,7 @@ dotnet build -c Release
 
 ### 配置智能体
 
-Claude Code：
+安装脚本已为 Claude Code 完成此步骤。如果你是从源码编译的：
 
 ```powershell
 claude mcp add dotpeek -- "<repo>\bin\Release\net472\DotPeekMcp.exe"
@@ -180,3 +190,11 @@ python tests/smoke_test.py
 - 仅支持 Windows，且必须安装 dotPeek。
 - 不包含 XML 文档和 PSI 解析。
 - 已加载的程序集在进程存活期间常驻内存。
+
+## 参与贡献
+
+欢迎提交 bug 报告、修复和想法。请阅读 [CONTRIBUTING.md](../../CONTRIBUTING.md) 了解如何搭建项目并运行冒烟测试，并查看 [更新日志](../../CHANGELOG.md) 了解各版本的变化。
+
+## 许可证
+
+[MIT](../../LICENSE)。该许可证仅涵盖本仓库的代码；dotPeek 及其 DLL 仍受 JetBrains 许可证约束。
