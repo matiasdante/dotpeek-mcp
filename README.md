@@ -12,6 +12,8 @@
 [![.NET Framework](https://img.shields.io/badge/.NET%20Framework-4.7.2-512bd4?style=flat-square&logo=dotnet&logoColor=white)](#requirements)
 [![dotPeek](https://img.shields.io/badge/dotPeek-2026.2-000000?style=flat-square&logo=jetbrains&logoColor=white)](#requirements)
 [![MCP](https://img.shields.io/badge/MCP-stdio-5c4ee5?style=flat-square)](#set-up-your-agent)
+[![CI](https://img.shields.io/github/actions/workflow/status/matiasdante/dotpeek-mcp/ci.yml?branch=main&style=flat-square&label=CI)](https://github.com/matiasdante/dotpeek-mcp/actions/workflows/ci.yml)
+[![License: MIT](https://img.shields.io/badge/license-MIT-green?style=flat-square)](LICENSE)
 
 [Quick start](#quick-start) · [How it works](#how-it-works) · [Tools](#tools) · [Examples](#examples) · [FAQ](#faq) · [Configuration](#configuration)
 
@@ -35,7 +37,15 @@ It is not a dotPeek plugin. dotPeek's standalone host does not install plugins, 
 - .NET SDK to build. The binary targets .NET Framework 4.7.2, which ships with Windows.
 - Python 3, only for the smoke test.
 
-### Build
+### Install
+
+```powershell
+irm https://raw.githubusercontent.com/matiasdante/dotpeek-mcp/v0.1.0/install.ps1 | iex
+```
+
+Downloads the tagged source to `%LOCALAPPDATA%\dotpeek-mcp`, builds it against your dotPeek, and registers `dotpeek` in Claude Code. Without Claude Code, it prints the configuration for any other MCP client. If dotPeek lives elsewhere, set `DOTPEEK_HOME` first. You can read [`install.ps1`](install.ps1) before running it.
+
+### Build from source
 
 ```powershell
 git clone https://github.com/matiasdante/dotpeek-mcp
@@ -47,7 +57,7 @@ If dotPeek lives elsewhere, build with `-p:DotPeekHome=<folder>` and pass `DOTPE
 
 ### Set up your agent
 
-Claude Code:
+The installer already does this for Claude Code. If you built from source:
 
 ```powershell
 claude mcp add dotpeek -- "<repo>\bin\Release\net472\DotPeekMcp.exe"
@@ -180,3 +190,11 @@ Builds the server and a .NET 8 fixture, then drives every read-only tool against
 - Windows only, and dotPeek must be installed.
 - No XML docs or PSI resolution.
 - Loaded assemblies stay in memory while the process lives.
+
+## Contributing
+
+Bug reports, fixes, and ideas are welcome. Read [CONTRIBUTING.md](CONTRIBUTING.md) to set up the project and run the smoke test, and check the [changelog](CHANGELOG.md) for what changed in each version.
+
+## License
+
+[MIT](LICENSE). The license covers this repository's code only; dotPeek and its DLLs stay under JetBrains' license.
